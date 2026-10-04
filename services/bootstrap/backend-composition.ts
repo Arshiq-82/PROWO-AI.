@@ -21,7 +21,7 @@ export function createBackendApplication(
 
   registerOrchestrationRoutes(
     apiRegistry,
-    authenticatedController as never
+    authenticatedController
   );
 
   let started = false;
