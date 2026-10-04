@@ -6,7 +6,7 @@ import {
   CodeEngine,
   ToolSystem,
 } from "../integrations/types";
-import { ComputerNetworkOrchestrator } from "../../computer-network/network-orchestrator";
+import { ComputerNetworkOrchestrator } from "../../computer-network/network-orchestrator/network-orchestrator";
 
 export interface OrchestratorEngineDependencies {
   approvals: ApprovalManager;
