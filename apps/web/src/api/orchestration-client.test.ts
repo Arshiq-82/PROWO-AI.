@@ -9,7 +9,7 @@ test("submits orchestration requests through the API transport", async () => {
   let received: any;
 
   const client = new OrchestrationClient({
-   request: async <T>(
+request: async <T>(
   request: ApiClientRequest
 ): Promise<ApiClientResponse<T>> => {
   received = request;
@@ -21,8 +21,7 @@ test("submits orchestration requests through the API transport", async () => {
       status: "completed",
     } as T,
   };
-},
-  const result = await client.submit({
+},  const result = await client.submit({
     message: "Build a program.",
   }, "token");
 
