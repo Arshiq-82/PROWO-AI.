@@ -4,7 +4,7 @@ import {
   OrchestrationHttpResponse,
 } from "./orchestration-controller";
 import { AuthenticatedRequestResolver } from "./authenticated-request";
-import { AuthenticationRequest } from "./types";
+import { AuthenticationRequest } from "./authentication-types";
 
 export interface AuthenticatedOrchestrationRequest
   extends OrchestrationHttpRequest {
