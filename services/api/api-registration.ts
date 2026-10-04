@@ -1,7 +1,24 @@
 import { ApiRouteRegistry } from "./route-registry";
 import { createOrchestrationApi } from "./orchestration-api";
-import { OrchestratorController } from "../orchestration/orchestration-controller";
+import {
+  OrchestrationController,
+  OrchestrationHttpRequest,
+  OrchestrationHttpResponse,
+} from "../orchestration/orchestration-controller";
 
-export function registerOrchestrationRoutes(registry: ApiRouteRegistry, controller: OrchestratorController): void {
+export interface OrchestrationControllerPort {
+  submit(
+    request: OrchestrationHttpRequest
+  ): Promise<OrchestrationHttpResponse>;
+
+  execute(
+    request: OrchestrationHttpRequest
+  ): Promise<OrchestrationHttpResponse>;
+}
+
+export function registerOrchestrationRoutes(
+  registry: ApiRouteRegistry,
+  controller: OrchestrationControllerPort
+): void {
   for (const route of createOrchestrationApi(controller).routes) registry.register(route.method, route.path, route.handler);
 }
