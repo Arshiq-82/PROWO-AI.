@@ -1,4 +1,4 @@
-import { ApplicationHealth, getApplicationHealth } from "../../application/application-health";
+import { ApplicationHealth, getApplicationHealth } from "../../applications/application-health";
 
 export interface ProductionHealthProvider {
   isReady(): boolean;
