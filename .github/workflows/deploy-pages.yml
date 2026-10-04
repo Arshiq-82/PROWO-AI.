@@ -2,7 +2,8 @@ name: Deploy Prowo AI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -15,11 +16,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
 
@@ -27,14 +26,14 @@ jobs:
         working-directory: apps/web
         run: npm install
 
-      - name: Build Prowo AI
+      - name: Build
         working-directory: apps/web
-       run: npx vite build --base=./
+        run: npx vite build --base=./
 
-      - name: Setup Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload site
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: apps/web/dist
@@ -45,9 +44,7 @@ jobs:
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy
-        id: deployment
         uses: actions/deploy-pages@v4
