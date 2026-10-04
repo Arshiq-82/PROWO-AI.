@@ -1,4 +1,4 @@
-import { OrchestratorController } from "../orchestration/orchestration-controller";
+import { OrchestrationController } from "../orchestration/orchestration-controller";
 import { OrchestrationDatabasePort } from "../orchestration/database-orchestration-repository";
 import { AuthServicePort } from "../api/authentication-adapter";
 import { ApiRouteRegistry } from "./../api/route-registry";
@@ -6,7 +6,7 @@ import { ApiRouteRegistry } from "./../api/route-registry";
 export interface BackendDependencies {
   database: OrchestrationDatabasePort;
   authService: AuthServicePort;
-  orchestratorController: OrchestratorController;
+  orchestratorController: OrchestrationController;
 }
 
 export interface BackendApplication {

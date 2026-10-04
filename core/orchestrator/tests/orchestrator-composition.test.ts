@@ -22,10 +22,12 @@ test("runtime factory exposes the orchestration dependency graph", () => {
     new FakeApprovalManager() as never,
     (registry: TargetExecutorRegistry) => {
       registry.register("local", {
-        execute: async () => "local-result",
+        target: "local",
+        execute: async (context) => ({ target: context.request.target ?? "local", success: true, output: "local-result" }),
       });
       registry.register("workflow", {
-        execute: async () => "workflow-result",
+        target: "workflow",
+        execute: async (context) => ({ target: context.request.target ?? "workflow", success: true, output: "workflow-result" }),
       });
     }
   );
@@ -44,7 +46,8 @@ test("runtime executes a registered target executor", async () => {
     new FakeApprovalManager() as never,
     (registry: TargetExecutorRegistry) => {
       registry.register("local", {
-        execute: async () => ({ executed: true }),
+        target: "local",
+        execute: async (context) => ({ target: context.request.target ?? "local", success: true, output: { executed: true } }),
       });
     }
   );

@@ -34,3 +34,5 @@ export class ProwoApiServer {
     );
   }
 }
+
+export { ProwoApiServer as ApiServer };

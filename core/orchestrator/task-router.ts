@@ -2,7 +2,7 @@ import {
   ExecutionTarget,
   OrchestratorRoute,
   OrchestratorTaskRequest,
-} from "./types";
+} from "./runtime-types";
 
 export class OrchestratorTaskRouter {
   route(request: OrchestratorTaskRequest): OrchestratorRoute {

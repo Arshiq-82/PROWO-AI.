@@ -3,15 +3,17 @@ import {
   AuthenticationRequest,
   AuthenticationResult,
 } from "./authentication-types";
-import { AuthService } from "../authentication/auth-service";
 
 export interface AuthServicePort {
-  authenticateSession(sessionId: string): {
+  authenticateSession?: (sessionId: string) => {
     authenticated: boolean;
     userId?: string;
     sessionId?: string;
     error?: string;
   };
+  authenticate?: (request: AuthenticationRequest) =>
+    | AuthenticationResult
+    | Promise<AuthenticationResult>;
 }
 
 export class AuthenticationAdapter implements AuthenticationPort {
@@ -20,51 +22,35 @@ export class AuthenticationAdapter implements AuthenticationPort {
   async authenticate(
     request: AuthenticationRequest
   ): Promise<AuthenticationResult> {
-    const sessionId = this.resolveSessionId(request);
+    if (this.authService.authenticate) {
+      const result = await this.authService.authenticate(request);
+      if (!result.authenticated || !result.identity) {
+        return { authenticated: false, error: result.error ?? "Authentication failed." };
+      }
+      return result;
+    }
 
-    if (!sessionId) {
-      return {
-        authenticated: false,
-        error: "Authentication session is required.",
-      };
+    const sessionId = this.resolveSessionId(request);
+    if (!sessionId || !this.authService.authenticateSession) {
+      return { authenticated: false, error: "Authentication session is required." };
     }
 
     const result = this.authService.authenticateSession(sessionId);
-
     if (!result.authenticated || !result.userId) {
-      return {
-        authenticated: false,
-        error: result.error ?? "Authentication failed.",
-      };
+      return { authenticated: false, error: result.error ?? "Authentication failed." };
     }
 
     return {
       authenticated: true,
-      identity: {
-        userId: result.userId,
-        sessionId: result.sessionId ?? sessionId,
-        roles: [],
-      },
+      identity: { userId: result.userId, sessionId: result.sessionId ?? sessionId, roles: [] },
     };
   }
 
   private resolveSessionId(request: AuthenticationRequest): string | undefined {
-    if (request.sessionId) {
-      return request.sessionId;
-    }
-
+    if (request.sessionId) return request.sessionId;
     const authorization = request.authorization?.trim();
-
-    if (!authorization) {
-      return undefined;
-    }
-
+    if (!authorization) return undefined;
     const [scheme, token] = authorization.split(/\s+/, 2);
-
-    if (scheme?.toLowerCase() !== "bearer" || !token) {
-      return undefined;
-    }
-
-    return token;
+    return scheme?.toLowerCase() === "bearer" && token ? token : undefined;
   }
 }

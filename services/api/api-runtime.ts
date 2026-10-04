@@ -1,4 +1,3 @@
-import { ApiServer } from "./api-server";
 import { BackendApplication } from "../bootstrap/types";
 
 export interface ApiRuntime {

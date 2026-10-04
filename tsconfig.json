@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "include": ["ai/**/*.ts", "applications/**/*.ts", "core/**/*.ts", "services/**/*.ts"],
+  "exclude": ["apps/web/node_modules", "apps/desktop/node_modules", "apps/agents/node_modules"]
+}

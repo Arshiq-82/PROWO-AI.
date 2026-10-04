@@ -3,10 +3,7 @@ import {
   OrchestrationRecordRepository,
 } from "../orchestration/orchestration-record-types";
 
-export interface DatabaseRecord {
-  id: string;
-  [key: string]: unknown;
-}
+export type DatabaseRecord = Record<string, unknown>;
 
 export interface OrchestrationDatabasePort {
   insert(record: DatabaseRecord): Promise<DatabaseRecord>;

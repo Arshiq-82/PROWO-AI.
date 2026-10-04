@@ -1,18 +1,19 @@
 import {
   AIModelRouter,
+  AIProvider,
   AIProviderAdapter,
   AIRequest,
   AIResponse,
 } from "./types";
 
 export class ProwoModelRouter implements AIModelRouter {
-  private readonly adapters = new Map<string, AIProviderAdapter>();
+  private readonly adapters = new Map<AIProvider, AIProviderAdapter>();
 
   register(adapter: AIProviderAdapter): void {
     this.adapters.set(adapter.provider, adapter);
   }
 
-  listProviders(): string[] {
+  listProviders(): AIProvider[] {
     return Array.from(this.adapters.keys());
   }
 

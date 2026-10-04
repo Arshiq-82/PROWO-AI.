@@ -1,4 +1,4 @@
-import { OrchestratorController } from "./orchestration-controller";
+import { OrchestrationController } from "./orchestration-controller";
 import { OrchestratorRuntimePort } from "./types";
 
 export interface CreateOrchestrationServiceDependencies {
@@ -7,8 +7,8 @@ export interface CreateOrchestrationServiceDependencies {
 
 export function createOrchestrationService(
   dependencies: CreateOrchestrationServiceDependencies
-): OrchestratorController {
-  return new OrchestratorController({
+): OrchestrationController {
+  return new OrchestrationController({
     orchestrator: dependencies.orchestrator,
   });
 }

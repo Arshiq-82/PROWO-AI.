@@ -10,7 +10,7 @@ import {
 
 export class TaskLifecycleManager {
   private readonly records = new Map<string, TaskLifecycleRecord>();
-  private readonly history = new Map<string, TaskLifecycleEvent[]>();
+  private readonly eventHistory = new Map<string, TaskLifecycleEvent[]>();
 
   constructor(
     private readonly stateMachine: TaskLifecycleStateMachine = new TaskLifecycleStateMachine(),
@@ -108,15 +108,15 @@ export class TaskLifecycleManager {
   }
 
   history(taskId: string): TaskLifecycleEvent[] {
-    return (this.history.get(taskId) ?? []).map((event) => ({
+    return (this.eventHistory.get(taskId) ?? []).map((event) => ({
       ...event,
       metadata: { ...(event.metadata ?? {}) },
     }));
   }
 
   private appendEvent(taskId: string, event: TaskLifecycleEvent): void {
-    const events = this.history.get(taskId) ?? [];
+    const events = this.eventHistory.get(taskId) ?? [];
     events.push(event);
-    this.history.set(taskId, events);
+    this.eventHistory.set(taskId, events);
   }
 }

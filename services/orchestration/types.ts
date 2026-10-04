@@ -1,4 +1,4 @@
-import { OrchestratorRequest, OrchestratorResult } from "../../core/orchestrator/runtime-types";
+import { OrchestratorTaskRequest } from "../../core/orchestrator/runtime-types";
 
 export interface OrchestrationSubmitRequest {
   userId: string;
@@ -27,9 +27,9 @@ export interface OrchestrationResponse {
 
 export interface OrchestratorRuntimePort {
   handle(
-    request: OrchestratorRequest,
+    request: OrchestratorTaskRequest,
     context?: OrchestrationContext
-  ): Promise<OrchestratorResult>;
+  ): Promise<OrchestrationResponse>;
 }
 
 export interface OrchestrationServicePort {

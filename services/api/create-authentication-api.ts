@@ -1,11 +1,11 @@
-import { OrchestratorController } from "../orchestration/orchestration-controller";
+import { OrchestrationController } from "../orchestration/orchestration-controller";
 import { AuthenticatedRequestResolver } from "./authenticated-request";
 import { AuthenticationAdapter, AuthServicePort } from "./authentication-adapter";
 import { AuthenticatedOrchestrationController } from "./authenticated-orchestration-controller";
 
 export interface AuthenticationApiDependencies {
   authService: AuthServicePort;
-  orchestrationController: OrchestratorController;
+  orchestrationController: OrchestrationController;
 }
 
 export function createAuthenticatedOrchestrationController(

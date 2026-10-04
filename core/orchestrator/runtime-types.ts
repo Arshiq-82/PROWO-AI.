@@ -9,9 +9,11 @@ export interface OrchestratorTaskRequest {
   taskId: string;
   userId?: string;
   projectId?: string;
+  selectedModel?: string;
   prompt: string;
   target?: ExecutionTarget;
   preferredDeviceId?: string;
+  timeoutMs?: number;
   metadata?: Record<string, unknown>;
 }
 

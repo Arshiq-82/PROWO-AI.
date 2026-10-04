@@ -1,16 +1,14 @@
-import {
-  OrchestratorTargetExecutor,
-  OrchestratorExecutors,
-} from "./orchestrator-runtime";
+import type { TargetExecutor } from "./executors/types";
+import type { OrchestratorExecutors } from "./orchestrator-runtime";
 import { ExecutionTarget } from "./runtime-types";
 
 export class TargetExecutorRegistry {
   private readonly executors = new Map<
     ExecutionTarget,
-    OrchestratorTargetExecutor
+    TargetExecutor
   >();
 
-  register(target: ExecutionTarget, executor: OrchestratorTargetExecutor): void {
+  register(target: ExecutionTarget, executor: TargetExecutor): void {
     this.executors.set(target, executor);
   }
 
@@ -18,7 +16,7 @@ export class TargetExecutorRegistry {
     return this.executors.delete(target);
   }
 
-  get(target: ExecutionTarget): OrchestratorTargetExecutor | undefined {
+  get(target: ExecutionTarget): TargetExecutor | undefined {
     return this.executors.get(target);
   }
 

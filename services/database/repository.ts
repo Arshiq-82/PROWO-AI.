@@ -4,7 +4,7 @@ import {
   DatabaseValue,
 } from "./types";
 
-export abstract class Repository<T extends DatabaseRecord> {
+export abstract class Repository<T extends { id: string; createdAt: string; updatedAt: string }> {
   constructor(
     protected readonly database: DatabaseAdapter,
     protected readonly collection: string
