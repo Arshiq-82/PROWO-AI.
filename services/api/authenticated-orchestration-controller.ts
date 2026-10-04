@@ -2,7 +2,7 @@ import {
   OrchestrationController,
   OrchestrationHttpRequest,
   OrchestrationHttpResponse,
-} from "./orchestration-controller";
+} } from "../orchestration/orchestration-controller";
 import { AuthenticatedRequestResolver } from "./authenticated-request";
 import { AuthenticationRequest } from "./authentication-types";
 
