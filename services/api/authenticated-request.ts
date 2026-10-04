@@ -2,7 +2,7 @@ import {
   AuthenticationPort,
   AuthenticatedIdentity,
   AuthenticationRequest,
-} from "./types";
+}from "./authentication-types";
 
 export interface ResolveIdentityResult {
   identity?: AuthenticatedIdentity;
